@@ -5,7 +5,7 @@ Pick-a-Flick is a web-based app aiding the user in choosing a what movie to watc
 ### Features
 - movie selections based off IMDB's 250 highest rated movies
 - card including movie poster image
-- button to randomizes next selection 
+- button to randomize next selection 
 - button to inspect selection further 
 - detailed page with movie specifics (i.e. main actors, genre, runtime, etc)
 
