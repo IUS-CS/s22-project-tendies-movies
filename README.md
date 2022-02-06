@@ -13,7 +13,7 @@ Pick-a-Flick is a web-based app aiding the user in choosing a what movie to watc
 
 - Python 3.10.2
 - Pylint
-- Bezel
+- Bazel
 - IMDb-Api
 - github
 
