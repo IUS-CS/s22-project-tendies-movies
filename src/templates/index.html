@@ -1,15 +1,23 @@
 <html>
     <head>
         <center>
-        <h3><u><p style = "color:red">Welcome to Pick-A-Flick!</u></h3></p>
+        <h3><u><p style = "color:red; font-size:30px; font-family:Verdana, Geneva, Tahoma, sans-serif">Ready to pick your next flick?</u></h3></p></p>
         </center>
     </head>
     <body style = "background-color: black">
         <body background = "{{user_image1}}">
-
         </body>
         <center>
             <img src = "{{user_image}}"
+        </center>
+        <center>
+        <P style = "color:red; font-size:15px; font-family:Verdana, Geneva, Tahoma, sans-serif">
+            Let's match you with the perfect flick.
+        </P>
+        <form method="post" action = "/">
+            <input type="submit" name="test1" value="Yes, I'll watch this!">
+            <input type="submit" name="test2" value="No, I'm looking for something else.">
+        </form>
         </center>
     </body>
 </html>
