@@ -12,7 +12,8 @@ app.config['UPLOAD_FOLDER'] = pictures
 def home(): # route handler function
     # returning a response
     tempPic = os.path.join(app.config['UPLOAD_FOLDER'], 'pic1.jpg' )
-    return render_template('index.html', user_image = tempPic)
+    backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' )
+    return render_template('index.html', user_image = tempPic, user_image1=backPic)
 
 
 #debug mode on
