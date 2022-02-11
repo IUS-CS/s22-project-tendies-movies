@@ -1,4 +1,4 @@
-# Sprint Ceremony Minutes
+# Sprint 1 Ceremony Minutes
   
 Date: 2022-02-10
 
@@ -27,19 +27,18 @@ This sprint, we completed:
   * Webserver setup with flask
   * Prototype webpage setup
 
-# Prototype Screenshots
+# Prototype Screenshot
 
 ![Homepage](/docs/images/Proto1.png?raw=true)
-![Homepage](/docs/images/Proto2.png?raw=true)
 
-## ---- Retrospective ----
+## Retrospective
 
 
 ### Good
 
-* Tyler developed a working prototype
-* Documentation has been made and ready to be developed alongside the project
-* Build environment has been configued, unit testing and all
+* Developed a, basic, working prototype
+* Simple documentation written and ready for expansion
+* Build environment setup and configured for all team members
 
 ### Bad
 
