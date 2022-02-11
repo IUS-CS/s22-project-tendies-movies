@@ -13,19 +13,19 @@ Members present:
 This sprint, we completed:
 
 * Documentation 
-* * AUTHORS
-* * LICENSE
-* * Proposal.md
-* * README.md
-* * organization.md
+  * AUTHORS
+  * LICENSE
+  * Proposal.md
+  * README.md
+  * organization.md
 * Build Environment
-* * Gitignore file
-* * Python VENV
-* * Import Requirements 
-* * Bazel testing environment
+  * Gitignore file
+  * Python VENV
+  * Import Requirements 
+  * Bazel testing environment
 * Website Basics
-* * Webserver setup with flask
-* * Prototype webpage setup
+  * Webserver setup with flask
+  * Prototype webpage setup
 
 # Prototype Screenshots
 
