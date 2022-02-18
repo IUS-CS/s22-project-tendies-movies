@@ -6,11 +6,16 @@ app = Flask(__name__)
 pictures = os.path.join('static','pics') #load pictures folder to flask
 app.config['UPLOAD_FOLDER'] = pictures
 
-#list of movies, WIP TESTING
+#list of movies
 movies = []
+
+#Movie test data -----
 movies.append(Movie())
 movies[0].name = "test"
 movies[0].image = os.path.join(app.config['UPLOAD_FOLDER'], 'movietest.jpg')
+# --------------------
+
+#import movie data to list here (or grab from another module?)
 
 # defining a route
 @app.route("/", methods=['GET', 'POST', 'PUT']) # decorator
@@ -20,11 +25,17 @@ def home(): # route handler function
 
     # Button handling
     if request.method == 'POST':
-        #testing button return
-        return render_template('index.html', user_image = movies[0].image, user_image1 = backPic)
+        if request.form["action"] == "Yes!":
+            return render_template('index.html', 
+                movie_poster = movies[0].image, 
+                background = backPic)
+        
+        elif request.form["action"] == "No.":
+            return render_template('index.html', 
+                movie_poster = backPic, 
+                background = backPic)
     
-    return render_template('index.html', user_image = tempPic, user_image1=backPic) #return html, sample pic, and background picture
-
+    return render_template('index.html', movie_poster = tempPic, background=backPic) #return html, sample pic, and background picture
 
 
 #debug mode on
