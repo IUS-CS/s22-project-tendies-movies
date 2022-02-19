@@ -14,9 +14,6 @@ random_Movie=randint(0,249)
 title = movie[random_Movie]['title']
 rating = movie[random_Movie]['rating']
 
-
-
-
 app = Flask(__name__)
 pictures = os.path.join('static','pics') #load pictures folder to flask
 app.config['UPLOAD_FOLDER'] = pictures
@@ -33,7 +30,7 @@ def home(): # route handler function
         #testing button return
         return render_template('yes.html', movie_title=title, movie_rating = rating, user_image = tempPic, yes_background = yesbackPic)
     
-    return render_template('index.html', movie_title=title, movie_rating = rating, user_image = tempPic, background=backPic) #return html, sample pic, and background picture
+    return render_template('index.html', movie_title=title, movie_rating = rating, movie_poster = tempPic, background=backPic) #return html, sample pic, and background picture
 
 
 
