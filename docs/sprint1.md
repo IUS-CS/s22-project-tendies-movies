@@ -6,7 +6,7 @@ Members present:
 
 * Tyler Schickel
 * Eli Nutter
-* Clint Wright
+* Clay Wright
   
 ## Demo
 
