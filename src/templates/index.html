@@ -9,15 +9,15 @@
         </body>
         <center>
             <p style = "color:red; font-size:30px; font-family:Verdana, Geneva, Tahoma, sans-serif"> {{ movie_title }} Rating: {{movie_rating}} </p>
-            <img src=”{{movie_poster}}”, width="500", height="600">
+            <img src = ”{{user_image}}”, width="500", height="600">
         </center>
         <center>
-        <P style = "color:black; font-size:15px; font-family:Verdana, Geneva, Tahoma, sans-serif">
+        <P id = "inner-box" style = "color:black; font-size:15px; font-family:Verdana, Geneva, Tahoma, sans-serif">
             Let's match you with the perfect flick.
         </P>
         <form method="post" action = "/">
-            <input type="submit" name="action" value="Yes!">
-            <input type="submit" name="action" value="No.">
+            <input id = "inner-box" style = "border:4px solid blue; border-radius: 5px" type="submit" name="action" value="Yes!">
+            <input id = "inner-box" style = "border:4px solid red; border-radius: 5px" type="submit"  name="action" value="No.">
         </form>
         </center>
     </body>
