@@ -15,9 +15,9 @@ class Movie:
         m = Movie()
         m.id = cinemagoer_movie.getID()
         m.title = cinemagoer_movie['title']
-        #m.description = cinemagoer_movie['plot summary']
-        #m.image = cinemagoer_movie['full-size cover url']
-        #m.genres = cinemagoer_movie['genres']
+        m.description = cinemagoer_movie['plot summary']
+        m.image = cinemagoer_movie['full-size cover url']
+        m.genres = cinemagoer_movie['genres']
         m.imdb_rating = cinemagoer_movie['rating']
         m.rank = rank
         return m
