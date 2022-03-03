@@ -10,9 +10,10 @@ ia = Cinemagoer()
 top250movie = ia.get_top250_movies()
 list = []
 
-
 for i in range(len(top250movie)):
-    list.append(Movie.convert(top250movie[i],i+1))
+    id = top250movie[i].getID()
+    m = ia.get_movie(id)
+    list.append(Movie.convert(m,i+1))
 
 
 
