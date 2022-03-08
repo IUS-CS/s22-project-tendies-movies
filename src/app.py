@@ -1,6 +1,6 @@
 from random import randint
 from flask import Flask, render_template, request
-from Movie import Movie
+#from Movie import Movie
 import os
 from imdb import Cinemagoer
 
@@ -22,11 +22,6 @@ url = cinemagoer_movie_object['full-size cover url']
 plot_summary = cinemagoer_movie_object['plot summary']
 #TODO fix formatting
 genres = cinemagoer_movie_object['genres']
-
-
-
-
-
 
 
 
@@ -52,7 +47,5 @@ def home(): # route handler function
     return render_template('index.html', movie_title=title, movie_rating = rating, user_image = url, background=backPic) #return html, sample pic, and background picture
 
 
-
-#debug mode on
-app.run(debug = True)
-
+#debug mode turned off, needed to test with Behave
+#app.run(debug = True)
