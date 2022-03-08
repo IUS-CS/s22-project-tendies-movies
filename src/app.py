@@ -1,30 +1,31 @@
-from random import randint
+import random
 from flask import Flask, render_template, request
-#from Movie import Movie
 import os
 from imdb import Cinemagoer
 
 # create an instance of the Cinemagoer class
 ia = Cinemagoer()
 
-# get a movie
-movie = ia.get_top250_movies()
+# get the list of top 250 movies
+movies = ia.get_top250_movies()
+# randomize movies
+random.shuffle(movies)
+# keeps track of our random list
+movie_index = 0
 
-random_Movie=randint(0,249)
-title = movie[random_Movie]['title']
-rating = movie[random_Movie]['rating']
+# Individual variables for movie details
+title = movies[movie_index]['title']
+rating = movies[movie_index]['rating']
 # specific id number to retrieve movie object from cinemagoer
-id = movie[random_Movie].getID()
-#cinemagoer specific movie object with access to more data fields (like cover url, plot summary, genres, etc)
-cinemagoer_movie_object = ia.get_movie(id)
-url = cinemagoer_movie_object['full-size cover url']
-#TODO fix formatting
-plot_summary = cinemagoer_movie_object['plot summary']
-#TODO fix formatting
-genres = cinemagoer_movie_object['genres']
+id = movies[movie_index].getID()
+# cinemagoer specific movie object with access to more data fields 
+# (like cover url, plot summary, genres, etc)
+cinemagoer = ia.get_movie(id)
+url = cinemagoer['full-size cover url']
+plot_summary = cinemagoer['plot summary']
+genres = cinemagoer['genres']
 
-
-
+#prepare to run the app and load background images
 app = Flask(__name__)
 pictures = os.path.join('static','pics') #load pictures folder to flask
 app.config['UPLOAD_FOLDER'] = pictures
@@ -45,7 +46,6 @@ def home(): # route handler function
             return render_template('no.html', movie_title=title, movie_rating = rating, user_image = url, background=backPic)
     
     return render_template('index.html', movie_title=title, movie_rating = rating, user_image = url, background=backPic) #return html, sample pic, and background picture
-
 
 #debug mode turned off, needed to test with Behave
 #app.run(debug = True)
