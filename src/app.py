@@ -1,34 +1,11 @@
-from random import randint
-from flask import Flask, render_template, request
-from Movie import Movie
 import os
+from flask import Flask, render_template, request
+from MovieClass import MovieClass
 from imdb import Cinemagoer
 
-# create an instance of the Cinemagoer class
-ia = Cinemagoer()
-
-# get a movie
-movie = ia.get_top250_movies()
-
-random_Movie=randint(0,249)
-title = movie[random_Movie]['title']
-rating = movie[random_Movie]['rating']
-# specific id number to retrieve movie object from cinemagoer
-id = movie[random_Movie].getID()
-#cinemagoer specific movie object with access to more data fields (like cover url, plot summary, genres, etc)
-cinemagoer_movie_object = ia.get_movie(id)
-url = cinemagoer_movie_object['full-size cover url']
-#TODO fix formatting
-plot_summary = cinemagoer_movie_object['plot summary']
-#TODO fix formatting
-genres = cinemagoer_movie_object['genres']
-
-
-
-
-
-
-
+movie = MovieClass()
+movie.import_top250()
+movie.randomize()
 
 app = Flask(__name__)
 pictures = os.path.join('static','pics') #load pictures folder to flask
@@ -45,14 +22,17 @@ def home(): # route handler function
     if request.method == 'POST':
         #testing button return
         if request.form['action'] == 'Yes!':
-            return render_template('yes.html', movie_title=title, movie_rating = rating, user_image = url, yes_background = yesbackPic , movie_plot_summary = plot_summary, movie_genres = genres)
+            return render_template('yes.html', movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                yes_background = yesbackPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())
         if request.form['action'] == 'No.':
-            return render_template('no.html', movie_title=title, movie_rating = rating, user_image = url, background=backPic)
+            movie.randomize()
+            return render_template('no.html', movie_title=movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), background=backPic)
     
-    return render_template('index.html', movie_title=title, movie_rating = rating, user_image = url, background=backPic) #return html, sample pic, and background picture
-
-
+    return render_template('index.html', movie_title=movie.title(), movie_rating = movie.rating(), 
+        user_image = movie.cover_url(), background=backPic) #return html, sample pic, and background picture
 
 #debug mode on
 app.run(debug = True)
-
