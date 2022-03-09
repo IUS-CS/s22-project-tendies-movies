@@ -15,7 +15,6 @@ app.config['UPLOAD_FOLDER'] = pictures
 # defining a route
 @app.route("/", methods=['GET', 'POST', 'PUT']) # decorator
 def home(): # route handler function
-    tempPic = os.path.join(app.config['UPLOAD_FOLDER'], 'pic1.jpg' ) #temp variable for sample pic
     backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
     yesbackPic = os.path.join(app.config['UPLOAD_FOLDER'], 'yespic.jpg' ) #variable for yes_background image
 
