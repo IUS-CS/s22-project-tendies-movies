@@ -7,15 +7,20 @@ class MovieClass:
         self.movies = []
         self.index = 0
         self.cinemagoer = Cinemagoer()
+        self.movie_obj = 0
 
     # Get top 250 movies
     def import_top250(self):
         self.movies = self.cinemagoer.get_top250_movies()
+        
+        # Update the movie object variable
+        self.movie_object()
 
     # Import a list of movies into the class
     def add(self, movie_list):
         self.movies = movie_list
         self.index = 0
+        self.movie_object()
 
     # Append a movie to the movie list
     def append(self, movie):
@@ -29,12 +34,15 @@ class MovieClass:
         else:
         #otherwise, wrap around to 0
             self.index = 0
-    
+        
+        # Update the movie object variable
+        self.movie_object()
+
     # Return the movie object of the current movie
     def movie_object(self):
         id = self.movies[self.index].getID()
-        movie_object = self.cinemagoer.get_movie(id)
-        return movie_object
+        self.movie_obj = self.cinemagoer.get_movie(id)
+        return self.movie_obj
 
     # Randomize the internal movie list
     def randomize(self):
@@ -50,10 +58,10 @@ class MovieClass:
 
     # Return the URL for the cover image of the current movie
     def cover_url(self):
-        return self.movie_object()["full-size cover url"]
+        return self.movie_obj["full-size cover url"]
 
     def plot_summary(self):
-        return self.movie_object()["plot summary"]
+        return self.movie_obj["plot summary"]
 
     def genres(self):
-        return self.movie_object()["genres"]
+        return self.movie_obj["genres"]

@@ -48,5 +48,5 @@ def home(): # route handler function
         user_image = movie.cover_url(), 
         background = backPic) #return html, sample pic, and background picture
 
-#Disabled debug mode for Behave testing
-#app.run(debug = True)
+#Disable to use Behave testing
+app.run(debug = True)
