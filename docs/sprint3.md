@@ -21,7 +21,7 @@ This sprint, we completed:
   * Implemented feature to allow users to pick initial movie by genre
 
 # Prototype Screenshot
-![Homepage](/docs/images/Sprint3_Home.png?raw=true)
+![Homepage](/docs/images/Sprint3_Home.PNG?raw=true)
 
 ## Retrospective
 
