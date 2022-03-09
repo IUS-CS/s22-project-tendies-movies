@@ -28,3 +28,7 @@ API Requests - While not a specific pattern, this kind of request is used consta
 
 Iterator Pattern-The goal is to create a list class that we can access and traverse to find the information we need at a given time. Currently, we're looking at traversing the moving class by genre to send back a specific movie that matches the given movie to the client.
 
+## Object Pool Design Pattern Diagram
+
+![Blank diagram](https://user-images.githubusercontent.com/90376432/157350155-13a2207c-53e3-4d73-b617-eda18bc78f44.jpeg)
+
