@@ -23,17 +23,30 @@ def home(): # route handler function
     if request.method == 'POST':
         #testing button return
         if request.form['action'] == 'Yes!':
-            return render_template('yes.html', movie_title = movie.title(), 
-                movie_rating = movie.rating(), user_image = movie.cover_url(), 
-                yes_background = yesbackPic, movie_plot_summary = movie.plot_summary(),
+            return render_template(
+                'yes.html', 
+                movie_title = movie.title(), 
+                movie_rating = movie.rating(), 
+                user_image = movie.cover_url(), 
+                yes_background = yesbackPic, 
+                movie_plot_summary = movie.plot_summary(),
                 movie_genres = movie.genres())
-        if request.form['action'] == 'No.':
-            movie.randomize()
-            return render_template('no.html', movie_title=movie.title(), 
-                movie_rating = movie.rating(), user_image = movie.cover_url(), background=backPic)
-    
-    return render_template('index.html', movie_title=movie.title(), movie_rating = movie.rating(), 
-        user_image = movie.cover_url(), background=backPic) #return html, sample pic, and background picture
 
-#debug mode on
-app.run(debug = True)
+        if request.form['action'] == 'No.':
+            movie.next() # Move to the next movie in the list
+            return render_template(
+                'no.html', 
+                movie_title = movie.title(), 
+                movie_rating = movie.rating(), 
+                user_image = movie.cover_url(), 
+                background = backPic)
+    
+    return render_template(
+        'index.html', 
+        movie_title = movie.title(), 
+        movie_rating = movie.rating(), 
+        user_image = movie.cover_url(), 
+        background = backPic) #return html, sample pic, and background picture
+
+#Disabled debug mode for Behave testing
+#app.run(debug = True)
