@@ -38,12 +38,14 @@ This sprint, we completed:
 
 * Work flow felt slightly unsteady at times. Progress was made, but did not feel consistent. 
 * Nearly missed all deliverables needed for this sprint.
+* Difficulty adding unit tests
 
 ### Actionable Commitments
 
-* Continue to develop ideas for the website
+* Continue to implement ideas for the website
 * Continue to increase readabilty of the website
 * Add more customization to make website really pop
+* Complete a couple unit tests for the program
 
 ## Planning
 
