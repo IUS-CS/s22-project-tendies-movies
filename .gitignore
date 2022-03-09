@@ -333,3 +333,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,macos,linux,bazel,venv,flask
+
+#.vscode
+*.vscode
+*.bat
