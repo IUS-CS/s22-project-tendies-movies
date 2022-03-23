@@ -12,6 +12,14 @@ app = Flask(__name__)
 pictures = os.path.join('static','pics') #load pictures folder to flask
 app.config['UPLOAD_FOLDER'] = pictures
 
+def findMovie(i):
+    movie.randomize()
+    if i in movie.genres():
+        return 0
+    else:
+        return findMovie(i)
+    
+
 # defining a route
 @app.route("/", methods=['GET', 'POST', 'PUT']) # decorator
 def home(): # route handler function
@@ -36,25 +44,15 @@ def home(): # route handler function
 
         if request.form['action'] == 'Action':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Action"):
-                        count = 1
-            return render_template('no.html',  movie_title = movie.title(), 
+            findMovie('Action')
+            return render_template('Action.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
                 movie_genres = movie.genres())#Find an action flick
 
         if request.form['action'] == 'Adventure':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Adventure"):
-                        count = 1
+            findMovie('Adventure')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -62,12 +60,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'Animation':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Animation"):
-                        count = 1
+            findMovie('Animation')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -75,12 +68,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'Biography':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Biography"):
-                        count = 1
+            findMovie('Biography')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -88,12 +76,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'Comedy':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Comedy"):
-                        count = 1
+            findMovie('Comedy')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -101,12 +84,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'Crime':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Crime"):
-                        count = 1
+            findMovie('Crime')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -115,11 +93,7 @@ def home(): # route handler function
         if request.form['action'] == 'Drama':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
             count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Drama"):
-                        count = 1
+            findMovie('Drama')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -127,12 +101,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'Family':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Family"):
-                        count = 1
+            findMovie('Family')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -140,12 +109,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'Fantasy':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Fantasy"):
-                        count = 1
+            findMovie('Fantasy')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -153,12 +117,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'Film-Noir':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Film-Noir"):
-                        count = 1
+            findMovie('Film-Noir')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -166,12 +125,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'History':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "History"):
-                        count = 1
+            findMovie('History')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -179,12 +133,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'Horror':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Horror"):
-                        count = 1
+            findMovie('Horror')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -192,12 +141,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'Mystery':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Mystery"):
-                        count = 1
+            findMovie('Mystery')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -205,12 +149,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'Romance':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Romance"):
-                        count = 1
+            findMovie('Romance')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -218,12 +157,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'Sci-Fi':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Sci-Fi"):
-                        count = 1
+            findMovie('Sci-Fi')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -232,12 +166,7 @@ def home(): # route handler function
         
         if request.form['action'] == 'Thriller':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Thriller"):
-                        count = 1
+            findMovie('Thriller')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -245,12 +174,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'War':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "War"):
-                        count = 1
+            findMovie('War')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),
@@ -258,12 +182,7 @@ def home(): # route handler function
 
         if request.form['action'] == 'Western':
             backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-            count = 0
-            while (count != 1):
-                movie.randomize()
-                for i in movie.genres():
-                    if(i == "Western"):
-                        count = 1
+            findMovie('Western')
             return render_template('no.html',  movie_title = movie.title(), 
                 movie_rating = movie.rating(), user_image = movie.cover_url(), 
                 background=backPic, movie_plot_summary = movie.plot_summary(),

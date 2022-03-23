@@ -57,3 +57,5 @@ class MovieClass:
 
     def genres(self):
         return self.movie_object()["genres"] 
+
+    
