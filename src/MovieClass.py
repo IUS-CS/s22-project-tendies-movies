@@ -20,11 +20,15 @@ class MovieClass:
     # Takes a list of genres and removes all movies that are not
     # any of those genres
     def exclusive_genre_select(self, genres):
+        #create an empty list to be the replacement of the main list
+        movie_genres = []
         for movie in self.movies:
             #calculate the intersection of movie.genres and genres
             intersect = set(self.genres()).intersection()
-            if intersect == []:
-                self.movies.remove(movie)
+            if intersect != []:
+                movie_genres.append(movie)
+        #Save all of the movies that were found
+        self.movies = movie_genres
 
     # Append a movie to the movie list
     def append(self, movie):
