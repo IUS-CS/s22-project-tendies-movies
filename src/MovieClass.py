@@ -1,5 +1,9 @@
 import random
 from imdb import Cinemagoer
+from imdb.Movie import Movie
+
+#Set the default movie info so genres is included
+Movie.default_info = ['main', 'plot', 'genres']
 
 class MovieClass:
     #Basic constructor for movie elements
@@ -71,13 +75,18 @@ class MovieClass:
         return self.movie_object()["plot summary"]
 
     def genres(self):
-        return self.movie_object()["genres"] 
+        #We don't actually need to go create a movie object
+        #for the genres, since we included it in the default information
+        #set on line 6
+        return self.movies[self.index]["genres"] 
 
     # Verify the current movie is actually part of the selected genres list
     def _verify_genre(self):
         if self.selected_genre != []:
                 flag = False
                 for genre in self.selected_genre:
+                    print(self.genres())
+                    print(self.movies[self.index])
                     #If the genre IS selected, then exit the loop
                     if genre in self.genres():
                         flag = True
