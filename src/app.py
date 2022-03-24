@@ -40,7 +40,10 @@ def home(): # route handler function
         
         else:
             genre = request.form['action']
-            movie.select_genre(genre)
+            if genre == 'Any movie for me':
+                genre = ''
+                
+            movie.select_genre([genre])
             movie.randomize()
             return movie_details('no.html', backPic)
 
