@@ -1,10 +1,5 @@
 import random
 from imdb import Cinemagoer
-from imdb.Movie import Movie
-
-#Set the default movie info so genres is included
-#Movie.default_info = ['main', 'plot', 'genres']
-#print(Movie.get_current_info)
 
 class MovieClass:
     #Basic constructor for movie elements
