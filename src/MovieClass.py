@@ -13,7 +13,7 @@ class MovieClass:
         self.movies = self.cinemagoer.get_top250_movies()
 
     # Import a list of movies into the class
-    def add(self, movie_list):
+    def replace(self, movie_list):
         self.movies = movie_list
         self.index = 0
 
