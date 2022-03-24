@@ -39,17 +39,7 @@ class MovieClass:
 
             #After incrementing, we need to make sure the current movie
             #is of the selected genres.
-            if self.selected_genre != []:
-                flag = False
-                for genre in self.selected_genre:
-                    #If the genre IS selected, then exit the loop
-                    if genre in self.genres():
-                        flag = True
-                        break
-                #If we never selected any of the genres, then increment    
-                if not flag:
-                    self.next()
-
+            self._verify_genre()
         #otherwise, just stay at the end of the list
 
     # Return the movie object of the current movie
@@ -63,6 +53,7 @@ class MovieClass:
     # Randomize the internal movie list
     def randomize(self):
         random.shuffle(self.movies)
+        self._verify_genre()
 
     # Return the title of the current movie
     def title(self):
@@ -81,3 +72,16 @@ class MovieClass:
 
     def genres(self):
         return self.movie_object()["genres"] 
+
+    # Verify the current movie is actually part of the selected genres list
+    def _verify_genre(self):
+        if self.selected_genre != []:
+                flag = False
+                for genre in self.selected_genre:
+                    #If the genre IS selected, then exit the loop
+                    if genre in self.genres():
+                        flag = True
+                        break
+                #If we never selected any of the genres, then increment    
+                if not flag:
+                    self.next()
