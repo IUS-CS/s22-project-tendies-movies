@@ -8,6 +8,7 @@ class MovieClass:
         self.index = 0
         self.cinemagoer = Cinemagoer()
         self.movie_obj = None
+        self.selected_genre = []
 
     # Get top 250 movies
     def import_top250(self):
@@ -21,24 +22,8 @@ class MovieClass:
     # Takes a list of genres and removes all movies that are not
     # any of those genres
     def select_genre(self, genres):
-        selected_movies = []
+        self.selected_genre = genres
         
-        #Find all movies with the provided genres
-        for movie in self.movies:
-            for genre in genres:
-                print(self.genres())
-                if genre in self.genres():
-                    selected_movies.append(movie)
-                    print(selected_movies)
-                    break
-            #This might be kind of confusing, but since I'm using the
-            #internal self.genres() function, I need to use self.next()
-            #to get to the next movie in the list. 
-            self.next()
-
-        self.replace(selected_movies)
-        
-
     # Append a movie to the movie list
     def append(self, movie):
         self.movies.append(movie)
@@ -51,16 +36,26 @@ class MovieClass:
         #if we don't go out of bounds, increment
         if self.index < len(self.movies):
             self.index += 1
-        else:
-        #otherwise, wrap around to 0
-            self.index = 0
+
+            #After incrementing, we need to make sure the current movie
+            #is of the selected genres.
+            if self.selected_genre != []:
+                flag = False
+                for genre in self.selected_genre:
+                    #If the genre IS selected, then exit the loop
+                    if genre in self.genres():
+                        flag = True
+                        break
+                #If we never selected any of the genres, then increment    
+                if not flag:
+                    self.next()
+
+        #otherwise, just stay at the end of the list
 
     # Return the movie object of the current movie
     def movie_object(self):
         #If there is not a movie object for the current film, make one
         if self.movie_obj == None:
-            print("Index: " + str(self.index) + "\nLength: " + str(len(self.movies)))
-
             id = self.movies[self.index].getID()
             self.movie_obj = self.cinemagoer.get_movie(id)
         return self.movie_obj
