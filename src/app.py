@@ -15,10 +15,10 @@ app.config['UPLOAD_FOLDER'] = pictures
 #Returns a render template with all the movie details that "movie" currently
 #points to. Uses the passed html file and background. Used to make code
 #easier to read.
-def movie_details(html, background):
+def movie_details(html, bg):
     return render_template(html, movie_title = movie.title(), 
         movie_rating = movie.rating(), user_image = movie.cover_url(), 
-        background=background, movie_plot_summary = movie.plot_summary(),
+        background = bg, movie_plot_summary = movie.plot_summary(),
         movie_genres = movie.genres())
 
 # defining a route
