@@ -50,6 +50,3 @@ def home(): # route handler function
 
 #debug mode on
 app.run(debug = True)
-
-#Disable to use Behave testing
-app.run(debug = True)
