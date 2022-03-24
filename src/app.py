@@ -13,6 +13,14 @@ app = Flask(__name__)
 pictures = os.path.join('static','pics') #load pictures folder to flask
 app.config['UPLOAD_FOLDER'] = pictures
 
+#Returns a render template with all the movie details that "movie" currently
+#points to. Uses the passed html file and background.
+def movie_details(html, background):
+    return render_template(html, movie_title = movie.title(), 
+        movie_rating = movie.rating(), user_image = movie.cover_url(), 
+        background=background, movie_plot_summary = movie.plot_summary(),
+        movie_genres = movie.genres())
+
 # defining a route
 @app.route("/", methods=['GET', 'POST', 'PUT']) # decorator
 def home(): # route handler function
