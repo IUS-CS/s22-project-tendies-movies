@@ -8,6 +8,7 @@ movie = MovieClass()
 movie.import_top250()
 movie.randomize()
 
+#prepare to run the app and load background images
 app = Flask(__name__)
 pictures = os.path.join('static','pics') #load pictures folder to flask
 app.config['UPLOAD_FOLDER'] = pictures
@@ -15,7 +16,6 @@ app.config['UPLOAD_FOLDER'] = pictures
 # defining a route
 @app.route("/", methods=['GET', 'POST', 'PUT']) # decorator
 def home(): # route handler function
-    tempPic = os.path.join(app.config['UPLOAD_FOLDER'], 'pic1.jpg' ) #temp variable for sample pic
     backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
     yesbackPic = os.path.join(app.config['UPLOAD_FOLDER'], 'yespic.jpg' ) #variable for yes_background image
     # get a movie
@@ -285,3 +285,5 @@ def home(): # route handler function
 #debug mode on
 app.run(debug = True)
 
+#Disable to use Behave testing
+app.run(debug = True)

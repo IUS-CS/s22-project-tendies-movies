@@ -20,7 +20,6 @@ class MovieClass:
     # Append a movie to the movie list
     def append(self, movie):
         self.movies.append(movie)
-
     # Increment to the next movie in the list
     def next(self):
         #if we don't go out of bounds, increment
@@ -43,7 +42,6 @@ class MovieClass:
     # Return the title of the current movie
     def title(self):
         return self.movies[self.index]["title"]
-
     # Return the current movie rating
     def rating(self):
         return self.movies[self.index]["rating"]
