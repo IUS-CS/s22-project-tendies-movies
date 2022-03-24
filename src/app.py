@@ -1,28 +1,12 @@
-from random import randint
-from flask import Flask, render_template, request
-from Movie import Movie
 import os
+import re
+from flask import Flask, render_template, request
+from MovieClass import MovieClass
 from imdb import Cinemagoer
 
-# create an instance of the Cinemagoer class
-ia = Cinemagoer()
-
-# get a movie
-movie = ia.get_top250_movies()
-
-#random_Movie=randint(0,249)
-#title = movie[random_Movie]['title']
-#rating = movie[random_Movie]['rating']
-# specific id number to retrieve movie object from cinemagoer
-#id = movie[random_Movie].getID()
-#cinemagoer specific movie object with access to more data fields (like cover url, plot summary, genres, etc)
-#cinemagoer_movie_object = ia.get_movie(id)
-#url = cinemagoer_movie_object['full-size cover url']
-#TODO fix formatting
-#plot_summary = cinemagoer_movie_object['plot summary']
-#TODO fix formatting
-#genres = cinemagoer_movie_object['genres']
-
+movie = MovieClass()
+movie.import_top250()
+movie.randomize()
 
 app = Flask(__name__)
 pictures = os.path.join('static','pics') #load pictures folder to flask
@@ -34,41 +18,269 @@ def home(): # route handler function
     tempPic = os.path.join(app.config['UPLOAD_FOLDER'], 'pic1.jpg' ) #temp variable for sample pic
     backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
     yesbackPic = os.path.join(app.config['UPLOAD_FOLDER'], 'yespic.jpg' ) #variable for yes_background image
-    random_Movie=randint(0,249)
-    title = movie[random_Movie]['title']
-    rating = movie[random_Movie]['rating']
-    # specific id number to retrieve movie object from cinemagoer
-    id = movie[random_Movie].getID()
-    #cinemagoer specific movie object with access to more data fields (like cover url, plot summary, genres, etc)
-    cinemagoer_movie_object = ia.get_movie(id)
-    url = cinemagoer_movie_object['full-size cover url']
-    #TODO fix formatting
-    plot_summary = cinemagoer_movie_object['plot summary']
-    #TODO fix formatting
-    genres = cinemagoer_movie_object['genres']
-    # Button handling
+    # get a movie
     if request.method == 'POST':
-        #testing button return
+
         if request.form['action'] == 'Yes!':
-            return render_template('yes.html', yes_title=title, movie_rating = rating, user_image = url, yes_background = yesbackPic , movie_plot_summary = plot_summary, movie_genres = genres)
+            return render_template('yes.html', movie_title = movie.title(), 
+            movie_rating = movie.rating(), user_image = movie.cover_url(), 
+            yes_background = yesbackPic, movie_plot_summary = movie.plot_summary(),
+            movie_genres = movie.genres())
+
         if request.form['action'] == 'No.':
-            random_Movie=randint(0,249)
-            title = movie[random_Movie]['title']
-            rating = movie[random_Movie]['rating']
-            # specific id number to retrieve movie object from cinemagoer
-            id = movie[random_Movie].getID()
-            #cinemagoer specific movie object with access to more data fields (like cover url, plot summary, genres, etc)
-            cinemagoer_movie_object = ia.get_movie(id)
-            url = cinemagoer_movie_object['full-size cover url']
-            #TODO fix formatting
-            plot_summary = cinemagoer_movie_object['plot summary']
-            #TODO fix formatting
-            genres = cinemagoer_movie_object['genres']
-            return render_template('no.html', movie_title=title, movie_rating = rating, user_image = url, background=backPic , movie_plot_summary = plot_summary, movie_genres = genres)
-    
-    return render_template('index.html', movie_title=title, movie_rating = rating, user_image = url, background=backPic , movie_plot_summary = plot_summary, movie_genres = genres) #return html, sample pic, and background picture
+            movie.randomize()
+            return render_template('no.html', movie_title = movie.title(), 
+            movie_rating = movie.rating(), user_image = movie.cover_url(), 
+            background=backPic, movie_plot_summary = movie.plot_summary(),
+            movie_genres = movie.genres())
 
+        if request.form['action'] == 'Action':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Action"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())#Find an action flick
 
+        if request.form['action'] == 'Adventure':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Adventure"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())#Find an adventure flick
+
+        if request.form['action'] == 'Animation':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Animation"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())#Find an animation flick
+
+        if request.form['action'] == 'Biography':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Biography"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())#Find an adventure flick
+
+        if request.form['action'] == 'Comedy':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Comedy"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())#Find a comedy
+
+        if request.form['action'] == 'Crime':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Crime"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())#Find a comedy
+
+        if request.form['action'] == 'Drama':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Drama"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())#Find a drama
+
+        if request.form['action'] == 'Family':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Family"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())#Find a fantasy flick
+
+        if request.form['action'] == 'Fantasy':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Fantasy"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())#Find a fantasy flick
+
+        if request.form['action'] == 'Film-Noir':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Film-Noir"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())#Find a fantasy flick
+
+        if request.form['action'] == 'History':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "History"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())#Find a history flick
+
+        if request.form['action'] == 'Horror':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Horror"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())#Find a history flick
+
+        if request.form['action'] == 'Mystery':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Mystery"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())#Find a history flick
+
+        if request.form['action'] == 'Romance':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Romance"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())
+
+        if request.form['action'] == 'Sci-Fi':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Sci-Fi"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())
+
+        
+        if request.form['action'] == 'Thriller':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Thriller"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())
+
+        if request.form['action'] == 'War':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "War"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())
+
+        if request.form['action'] == 'Western':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            count = 0
+            while (count != 1):
+                movie.randomize()
+                for i in movie.genres():
+                    if(i == "Western"):
+                        count = 1
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())
+
+        if request.form['action'] == 'Any movie for me':
+            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
+            movie.randomize()
+            return render_template('no.html',  movie_title = movie.title(), 
+                movie_rating = movie.rating(), user_image = movie.cover_url(), 
+                background=backPic, movie_plot_summary = movie.plot_summary(),
+                movie_genres = movie.genres())
+
+    return render_template('index.html', movie_title = movie.title(), 
+            movie_rating = movie.rating(), user_image = movie.cover_url(), 
+            background=backPic, movie_plot_summary = movie.plot_summary(),
+            movie_genres = movie.genres()) 
 
 #debug mode on
 app.run(debug = True)
