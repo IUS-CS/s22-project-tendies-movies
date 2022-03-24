@@ -26,12 +26,18 @@ class MovieClass:
         #Find all movies with the provided genres
         for movie in self.movies:
             for genre in genres:
+                print(self.genres())
                 if genre in self.genres():
                     selected_movies.append(movie)
-                    break  
+                    print(selected_movies)
+                    break
+            #This might be kind of confusing, but since I'm using the
+            #internal self.genres() function, I need to use self.next()
+            #to get to the next movie in the list. 
+            self.next()
 
         self.replace(selected_movies)
-        print(selected_movies)
+        
 
     # Append a movie to the movie list
     def append(self, movie):
