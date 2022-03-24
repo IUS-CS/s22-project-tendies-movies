@@ -3,7 +3,8 @@ from imdb import Cinemagoer
 from imdb.Movie import Movie
 
 #Set the default movie info so genres is included
-Movie.default_info = ['main', 'plot', 'genres']
+#Movie.default_info = ['main', 'plot', 'genres']
+#print(Movie.get_current_info)
 
 class MovieClass:
     #Basic constructor for movie elements
@@ -12,7 +13,7 @@ class MovieClass:
         self.index = 0
         self.cinemagoer = Cinemagoer()
         self.movie_obj = None
-        self.selected_genre = []
+        self.selected_genre = ['']
 
     # Get top 250 movies
     def import_top250(self):
@@ -61,7 +62,7 @@ class MovieClass:
 
     # Return the title of the current movie
     def title(self):
-        return self.movie_object()["title"]
+        return self.movies[self.index]["title"]
 
     # Return the current movie rating
     def rating(self):
@@ -78,15 +79,14 @@ class MovieClass:
         #We don't actually need to go create a movie object
         #for the genres, since we included it in the default information
         #set on line 6
-        return self.movies[self.index]["genres"] 
+        return self.movie_object()["genres"] 
 
     # Verify the current movie is actually part of the selected genres list
+    # TODO: Remove this and replace with a keyword search thing
     def _verify_genre(self):
-        if self.selected_genre != []:
+        if self.selected_genre != ['']:
                 flag = False
                 for genre in self.selected_genre:
-                    print(self.genres())
-                    print(self.movies[self.index])
                     #If the genre IS selected, then exit the loop
                     if genre in self.genres():
                         flag = True

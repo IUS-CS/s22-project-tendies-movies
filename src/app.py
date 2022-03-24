@@ -2,7 +2,6 @@ import os
 import re
 from flask import Flask, render_template, request
 from MovieClass import MovieClass
-from imdb import Cinemagoer
 
 movie = MovieClass()
 movie.import_top250()
@@ -42,7 +41,7 @@ def home(): # route handler function
             genre = request.form['action']
             if genre == 'Any movie for me':
                 genre = ''
-                
+
             movie.select_genre([genre])
             movie.randomize()
             return movie_details('no.html', backPic)
