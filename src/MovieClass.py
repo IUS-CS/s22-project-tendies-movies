@@ -17,9 +17,19 @@ class MovieClass:
         self.movies = movie_list
         self.index = 0
 
+    # Takes a list of genres and removes all movies that are not
+    # any of those genres
+    def exclusive_genre_select(self, genres):
+        for movie in self.movies:
+            #calculate the intersection of movie.genres and genres
+            intersect = set(self.genres()).intersection()
+            if intersect == []:
+                self.movies.remove(movie)
+
     # Append a movie to the movie list
     def append(self, movie):
         self.movies.append(movie)
+
     # Increment to the next movie in the list
     def next(self):
         #if we don't go out of bounds, increment
