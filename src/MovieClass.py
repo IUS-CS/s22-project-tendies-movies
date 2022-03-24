@@ -7,6 +7,7 @@ class MovieClass:
         self.movies = []
         self.index = 0
         self.cinemagoer = Cinemagoer()
+        self.movie_obj = None
 
     # Get top 250 movies
     def import_top250(self):
@@ -19,16 +20,18 @@ class MovieClass:
 
     # Takes a list of genres and removes all movies that are not
     # any of those genres
-    def exclusive_genre_select(self, genres):
-        #create an empty list to be the replacement of the main list
-        movie_genres = []
+    def select_genre(self, genres):
+        selected_movies = []
+        
+        #Find all movies with the provided genres
         for movie in self.movies:
-            #calculate the intersection of movie.genres and genres
-            intersect = set(self.genres()).intersection()
-            if intersect != []:
-                movie_genres.append(movie)
-        #Save all of the movies that were found
-        self.movies = movie_genres
+            for genre in genres:
+                if genre in self.genres():
+                    selected_movies.append(movie)
+                    break  
+
+        self.replace(selected_movies)
+        print(selected_movies)
 
     # Append a movie to the movie list
     def append(self, movie):
@@ -36,6 +39,9 @@ class MovieClass:
 
     # Increment to the next movie in the list
     def next(self):
+        #Set movie_obj to null
+        self.movie_obj = None
+
         #if we don't go out of bounds, increment
         if self.index < len(self.movies):
             self.index += 1
@@ -45,9 +51,13 @@ class MovieClass:
 
     # Return the movie object of the current movie
     def movie_object(self):
-        id = self.movies[self.index].getID()
-        movie_object = self.cinemagoer.get_movie(id)
-        return movie_object
+        #If there is not a movie object for the current film, make one
+        if self.movie_obj == None:
+            print("Index: " + str(self.index) + "\nLength: " + str(len(self.movies)))
+
+            id = self.movies[self.index].getID()
+            self.movie_obj = self.cinemagoer.get_movie(id)
+        return self.movie_obj
 
     # Randomize the internal movie list
     def randomize(self):
@@ -55,10 +65,11 @@ class MovieClass:
 
     # Return the title of the current movie
     def title(self):
-        return self.movies[self.index]["title"]
+        return self.movie_object()["title"]
+
     # Return the current movie rating
     def rating(self):
-        return self.movies[self.index]["rating"]
+        return self.movie_object()["rating"]
 
     # Return the URL for the cover image of the current movie
     def cover_url(self):
