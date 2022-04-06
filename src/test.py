@@ -78,6 +78,11 @@ class TestFindMovie(unittest.TestCase):
         error = "Horror is not found in movie genres."
         self.assertIn('Horror',movie.genres(), error)
 
+    def testHorrorSuccess(self):
+        findMovie('Musical')
+        error = "Horror is not found in movie genres."
+        self.assertIn('Horror',movie.genres(), error)
+
     def testMysterySuccess(self):
         findMovie('Mystery')
         error = "Mystery is not found in movie genres."

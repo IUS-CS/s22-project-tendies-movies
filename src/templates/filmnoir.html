@@ -1,0 +1,31 @@
+<html>
+    <body style = "background-color: black">
+        <body background = "{{background}}">
+        </body>
+        <center>
+            <p style = "color:red; font-size:30px; font-family:Verdana, Geneva, Tahoma, sans-serif"> {{ movie_title }} Rating: {{movie_rating}} </p>
+            <img src = "{{user_image}}", width="400", height="500" , style = "border:2000px green">
+        </center>
+        <center>
+            <h3><p style = "color:red; font-size:10px; font-family:Verdana, Geneva, Tahoma, sans-serif">{{movie_plot_summary}} </h3></p></p>
+        <center>
+        <center>
+            <h3><p style = "color:green; font-size:30px; font-family:Verdana, Geneva, Tahoma, sans-serif">{{movie_genres}} </h3></p></p
+        </center>
+        <center>
+        <P id = "inner-box" style = "color:white; font-size:15px; font-family:Verdana, Geneva, Tahoma, sans-serif">
+            Is this the Noir flick you're looking for?
+        </P>
+        </P>
+        <form method="post" action = "/filmnoir">
+            <input id = "inner-box" style = "border:4px solid blue; border-radius: 5px" type="submit" name="action" value="Yes!">
+            <input id = "inner-box" style = "border:4px solid red; border-radius: 5px" type="submit"  name="action" value="No.">
+        </form>
+        <P id = "inner-box" style = "color:white; font-size:15px; font-family:Verdana, Geneva, Tahoma, sans-serif">
+            Want to try a different genre?
+        </P>
+        <form method="post" action = "/filmnoir">
+            <input id = "inner-box" style = "border:4px solid purple; border-radius: 5px" type="submit" name="action" value="Different genre">
+        </center>
+    </body>
+</html>
