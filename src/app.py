@@ -4,6 +4,7 @@ from flask import Flask, render_template, request
 from MovieClass import MovieClass
 from imdb import Cinemagoer
 
+#initialize the movie class and randomize the internal list
 movie = MovieClass()
 movie.import_top250()
 movie.randomize()
@@ -12,12 +13,10 @@ app = Flask(__name__)
 pictures = os.path.join('static','pics') #load pictures folder to flask
 app.config['UPLOAD_FOLDER'] = pictures
 
-def findMovie(i):
-    movie.randomize()
-    if i in movie.genres():
-        return 0
-    else:
-        return findMovie(i)
+# Variables for active HTML and background for all
+backPic = ""
+currentHTML = ""
+flavortext = ""
 
 #Returns a render template with all the movie details that "movie" currently
 #points to. Uses the passed html file and background. Used to make code
@@ -31,44 +30,32 @@ def movie_details(html, bg):
 # defining a route
 @app.route("/", methods=['GET', 'POST', 'PUT']) # decorator
 def home(): # route handler function
-    backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
-    yesbackPic = os.path.join(app.config['UPLOAD_FOLDER'], 'yespic.jpg' ) #variable for yes_background image
-    scifibackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'scifi.jpg' )
-    actionbackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'action.jpg' )
-    romancebackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'romance.jpg' )
-    adventurebackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'adventure.jpg' )
-    animationbackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'animation.jpg' )
-    biographybackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'biography.jpg' )
-    comedybackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'comedy.jpg' )
-    crimebackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'crime.jpg' )
-    dramabackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'drama.jpg' )
-    familybackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'family.jpg' )
-    fantasybackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'fantasy.jpg' )
-    noirbackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'noir.jpg' )
-    historybackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'history.jpg' )
-    horrorbackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'horror.jpg' )
-    musicalbackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'musical.jpg' )
-    mysterybackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'mystery.jpg' )
-    thrillerbackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'thriller.jpg' )
-    warbackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'war.jpg' )
-    westernbackpic = os.path.join(app.config['UPLOAD_FOLDER'], 'western.jpg' )
+    #Default background picture
+    backPic = os.path.join(pictures, 'background.jpg')
+    #Yes back picture
+    yesBackPic = os.path.join(pictures, 'yespic.jpg')
 
     # get a movie
     if request.method == 'POST':
+        actionForm = request.form['action']
 
-        if request.form['action'] == 'Yes!':
-            return render_template('yes.html', movie_title = movie.title(), 
-            movie_rating = movie.rating(), user_image = movie.cover_url(), 
-            yes_background = yesbackPic, movie_plot_summary = movie.plot_summary(),
-            movie_genres = movie.genres())
+        if actionForm == 'Yes!':
+            currentHTML = 'yes.html'
+            backPic = os.path.join(pictures, 'yespic.jpg')
+        
+        elif actionForm == 'No.' or actionForm == 'Any movie for me':
+            movie.next()
+            return movie_details('no.html', backPic)
+        
+        elif actionForm == 'Any movie for me':
+            backPic = os.path.join(pictures, 'background.jpg')
+            return movie_details('no.html', backPic)
 
-        if request.form['action'] == 'No.':
-            movie.randomize()
-            return render_template('no.html', movie_title = movie.title(), 
-            movie_rating = movie.rating(), user_image = movie.cover_url(), 
-            background=backPic, movie_plot_summary = movie.plot_summary(),
-            movie_genres = movie.genres())
-
+        else:
+    
+    return movie_details(currentHTML, backPic)
+        
+        
         if request.form['action'] == 'Action':
            backPic = os.path.join(app.config['UPLOAD_FOLDER'], 'background.jpg' ) #variable for background image
            findMovie('Action')
