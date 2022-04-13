@@ -61,9 +61,14 @@ def home(): # route handler function
         # The 'actionForm' variable contains the string name of that genre
         # we use this to edit the flavortext and find the right background
         else:
+            # Change to lowercase for ease of use
+            actionForm = actionForm.lower()
+            # Update the movie list to contain only the selected genre
+            movie.select_genre(actionForm)
+            
             currentHTML = "genre_selected.html"
-            backPic = os.path.join(pictures, (actionForm.lower() + ".jpg"))
-            flavortext = "Is this the " + actionForm.lower() + " you're looking for?"
+            backPic = os.path.join(pictures, (actionForm + ".jpg"))
+            flavortext = "Is this the " + actionForm + " you're looking for?"
 
     return movie_details(currentHTML, backPic, flavortext)
 
