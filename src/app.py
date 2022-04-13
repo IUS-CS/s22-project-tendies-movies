@@ -57,7 +57,7 @@ def home(): # route handler function
             backPic = os.path.join(pictures, 'background.jpg')
 
         # reset to default - index values
-        elif actionForm == 'Different genre':
+        elif actionForm == 'Different genre' or actionForm == 'New flick':
             currentHTML = 'index.html'
             backPic = os.path.join(pictures, 'background.jpg')
 
@@ -69,6 +69,7 @@ def home(): # route handler function
             actionForm = actionForm.lower()
             # Update the movie list to contain only the selected genre
             movie.select_genre(actionForm)
+            movie.randomize()
 
             currentHTML = "genre_selected.html"
             backPic = os.path.join(pictures, (actionForm + ".jpg"))

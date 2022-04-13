@@ -12,11 +12,14 @@ class MovieClass:
     # Get top 250 movies
     def import_top250(self):
         self.movies = self.cinemagoer.get_top250_movies()
+        self.movie_obj = None
+        self.index = 0
 
     # Takes a list of genres and removes all movies that are not
     # any of those genres
     def select_genre(self, genres):
         self.movies = self.cinemagoer.get_top50_movies_by_genres(genres)
+        self.movie_obj = None
         self.index = 0
         
     # Append a movie to the movie list
