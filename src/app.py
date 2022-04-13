@@ -1,8 +1,6 @@
 import os
-import re
 from flask import Flask, render_template, request
 from MovieClass import MovieClass
-from imdb import Cinemagoer
 
 #initialize the movie class and randomize the internal list
 movie = MovieClass()
