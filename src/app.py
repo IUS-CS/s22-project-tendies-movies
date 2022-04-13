@@ -31,6 +31,10 @@ def movie_details(html, bg, text):
 # defining a route
 @app.route("/", methods=['GET', 'POST', 'PUT']) # decorator
 def home(): # route handler function
+    # Set the local variable definitions to match global
+    global currentHTML
+    global backPic
+    global flavortext
 
     # Check if a movie or genre has been selected
     if request.method == 'POST':
@@ -65,7 +69,7 @@ def home(): # route handler function
             actionForm = actionForm.lower()
             # Update the movie list to contain only the selected genre
             movie.select_genre(actionForm)
-            
+
             currentHTML = "genre_selected.html"
             backPic = os.path.join(pictures, (actionForm + ".jpg"))
             flavortext = "Is this the " + actionForm + " you're looking for?"
