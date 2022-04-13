@@ -43,7 +43,7 @@ def home(): # route handler function
         # Make sure default background is selected, and html is 'yes'
         if actionForm == 'Yes!':
             currentHTML = 'yes.html'
-            backPic = os.path.join(pictures, 'yespic.jpg')
+            backPic = os.path.join(pictures, 'yes.jpg')
         
         # Load next movie
         # The html document to load should already be in the currentHTML var
