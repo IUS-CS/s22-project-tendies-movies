@@ -53,6 +53,7 @@ def home(): # route handler function
         # Don't need to load next movie, since the current one is the first one
         # Back sure background is set to default and html is 'no'
         elif actionForm == 'Any movie for me':
+            movie.randomize()
             currentHTML = 'no.html'
             backPic = os.path.join(pictures, 'background.jpg')
 

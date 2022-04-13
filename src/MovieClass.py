@@ -56,7 +56,10 @@ class MovieClass:
 
     # Return the current movie rating
     def rating(self):
-        return self.movie_object()["rating"]
+        try:
+            return self.movie_object()["rating"]
+        except:
+            return "No Rating"
 
     # Return the URL for the cover image of the current movie
     def cover_url(self):
