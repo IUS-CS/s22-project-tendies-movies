@@ -49,6 +49,8 @@ class MovieClass:
     # Randomize the internal movie list
     def randomize(self):
         random.shuffle(self.movies)
+        self.movie_obj = None
+        self.index = 0
 
     # Return the title of the current movie
     def title(self):
