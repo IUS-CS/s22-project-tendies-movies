@@ -3,7 +3,7 @@
         <body background = "{{background}}">
         </body>
         <center>
-            <p style = "color:black; font-size:30px; font-family:Verdana, Geneva, Tahoma, sans-serif"> {{ movie_title }} Rating: {{movie_rating}} </p>
+            <p style = "color:red; font-size:30px; font-family:Verdana, Geneva, Tahoma, sans-serif"> {{ movie_title }} Rating: {{movie_rating}} </p>
             <img src = "{{user_image}}", width="400", height="500" , style = "border:2000px green">
         </center>
         <center>
@@ -11,20 +11,20 @@
         <center>
         <center>
             <h3><p style = "color:green; font-size:30px; font-family:Verdana, Geneva, Tahoma, sans-serif">{{movie_genres}} </h3></p></p
-        <center>
+        </center>
         <center>
         <P id = "inner-box" style = "color:white; font-size:15px; font-family:Verdana, Geneva, Tahoma, sans-serif">
-            Is this the Sci-Fi flick you're looking for?
+            {{flavor_text}}
         </P>
         </P>
-        <form method="post" action = "/scifi">
+        <form method="post" action = "/">
             <input id = "inner-box" style = "border:4px solid blue; border-radius: 5px" type="submit" name="action" value="Yes!">
             <input id = "inner-box" style = "border:4px solid red; border-radius: 5px" type="submit"  name="action" value="No.">
         </form>
         <P id = "inner-box" style = "color:white; font-size:15px; font-family:Verdana, Geneva, Tahoma, sans-serif">
             Want to try a different genre?
         </P>
-        <form method="post" action = "/scifi">
+        <form method="post" action = "/">
             <input id = "inner-box" style = "border:4px solid purple; border-radius: 5px" type="submit" name="action" value="Different genre">
         </center>
     </body>
